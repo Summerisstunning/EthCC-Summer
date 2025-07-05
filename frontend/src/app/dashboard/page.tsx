@@ -6,7 +6,7 @@ import { usePrivy } from '@privy-io/react-auth';
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { authenticated, logout } = usePrivy();
+  const { authenticated, ready, logout } = usePrivy();
   const [walletBalance] = useState(215.75); // Mock balance after contribution
   const [currentGoal] = useState({
     name: 'Trip to Bali',
@@ -16,16 +16,29 @@ export default function DashboardPage() {
 
   const progressPercentage = (currentGoal.currentAmount / currentGoal.targetAmount) * 100;
 
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center">
+        <div className="text-purple-600">Loading...</div>
+      </div>
+    );
+  }
+
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Please log in to continue</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">请先登录以继续</h2>
           <button
             onClick={() => router.push('/')}
             className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-semibold"
           >
-            Go Back
+            返回首页
           </button>
         </div>
       </div>
@@ -39,7 +52,7 @@ export default function DashboardPage() {
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-800">Shared Wallet Dashboard</h1>
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
             >
               Logout

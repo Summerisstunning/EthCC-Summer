@@ -5,7 +5,7 @@ import { usePrivy } from '@privy-io/react-auth';
 
 export default function Home() {
   const router = useRouter();
-  const { login, authenticated } = usePrivy();
+  const { login, authenticated, ready } = usePrivy();
 
   const handleStartRecording = () => {
     if (authenticated) {
@@ -14,6 +14,19 @@ export default function Home() {
       login();
     }
   };
+
+  const handleJoinWaitlist = () => {
+    // 可以集成邮件列表或其他功能
+    alert('感谢您的兴趣！我们会尽快联系您。');
+  };
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center">
+        <div className="text-purple-600">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
@@ -40,7 +53,10 @@ export default function Home() {
           >
             Start Recording Gratitude
           </button>
-          <button className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300">
+          <button 
+            onClick={handleJoinWaitlist}
+            className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300"
+          >
             Join the Waitlist
           </button>
         </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
+import UserInfo from '@/components/user-info';
 
 interface GratitudeItem {
   content: string;
@@ -11,7 +12,7 @@ interface GratitudeItem {
 
 export default function GratitudePage() {
   const router = useRouter();
-  const { authenticated } = usePrivy();
+  const { authenticated, ready } = usePrivy();
   const [gratitudeItems, setGratitudeItems] = useState<GratitudeItem[]>([
     { content: '', amount: 0 }
   ]);
@@ -41,16 +42,24 @@ export default function GratitudePage() {
     }
   };
 
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center">
+        <div className="text-purple-600">Loading...</div>
+      </div>
+    );
+  }
+
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Please log in to continue</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">请先登录以继续</h2>
           <button
             onClick={() => router.push('/')}
             className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-semibold"
           >
-            Go Back
+            返回首页
           </button>
         </div>
       </div>
@@ -60,6 +69,7 @@ export default function GratitudePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
       <div className="max-w-2xl mx-auto py-8">
+        <UserInfo />
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Log your gratitude for today</h1>
           <p className="text-gray-600 mb-8">Record up to 3 things you're grateful for today.</p>

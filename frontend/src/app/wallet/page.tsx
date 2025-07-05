@@ -6,7 +6,7 @@ import { usePrivy } from '@privy-io/react-auth';
 
 export default function WalletPage() {
   const router = useRouter();
-  const { authenticated } = usePrivy();
+  const { authenticated, ready } = usePrivy();
   const [contributionAmount, setContributionAmount] = useState(0);
   const [walletBalance] = useState(150.75); // Mock balance
   const [isLoading, setIsLoading] = useState(false);
@@ -23,16 +23,24 @@ export default function WalletPage() {
     router.push('/dashboard');
   };
 
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center">
+        <div className="text-purple-600">Loading...</div>
+      </div>
+    );
+  }
+
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Please log in to continue</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">请先登录以继续</h2>
           <button
             onClick={() => router.push('/')}
             className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-semibold"
           >
-            Go Back
+            返回首页
           </button>
         </div>
       </div>
