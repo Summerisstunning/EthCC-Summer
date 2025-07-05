@@ -29,20 +29,20 @@ export default function Providers({
           theme: 'light',
           accentColor: '#9333ea',
         },
+        defaultChain: {
+          id: 1,
+          name: 'Ethereum',
+          network: 'mainnet',
+          nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+          rpcUrls: { default: { http: ['https://eth-mainnet.g.alchemy.com/v2/demo'] } },
+        },
         supportedChains: [
-          {
-            id: 747,
-            name: 'Flow Mainnet EVM',
-            network: 'flow-mainnet',
-            nativeCurrency: { name: 'FLOW', symbol: 'FLOW', decimals: 18 },
-            rpcUrls: { default: { http: ['https://mainnet.evm.nodes.onflow.org'] } },
-          },
           {
             id: 1,
             name: 'Ethereum',
             network: 'mainnet',
             nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-            rpcUrls: { default: { http: ['https://mainnet.infura.io/v3/'] } },
+            rpcUrls: { default: { http: ['https://eth-mainnet.g.alchemy.com/v2/demo'] } },
           },
         ],
       }}

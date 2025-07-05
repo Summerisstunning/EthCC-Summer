@@ -6,6 +6,7 @@ import Navigation from "@/components/navigation";
 import ImageShowcase from "@/components/image-showcase";
 import ErrorBoundary from "@/components/error-boundary";
 import ExtensionDetector from "@/components/extension-detector";
+import DebugNavigation from "@/components/debug-navigation";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
             <Navigation />
             <ImageShowcase />
             <ExtensionDetector />
+            <DebugNavigation />
             {children}
           </Providers>
         </ErrorBoundary>

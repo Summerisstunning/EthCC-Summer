@@ -36,7 +36,14 @@ export default function Navigation() {
   ];
 
   const handleNavigation = (path: string) => {
-    router.push(path);
+    console.log('Navigating to:', path);
+    try {
+      router.push(path);
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Fallback to window.location
+      window.location.href = path;
+    }
   };
 
   const handleLogout = () => {
@@ -82,7 +89,14 @@ export default function Navigation() {
           
           {!authenticated ? (
             <button
-              onClick={login}
+              onClick={() => {
+                console.log('Login button clicked');
+                try {
+                  login();
+                } catch (error) {
+                  console.error('Login error:', error);
+                }
+              }}
               className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
               title="Connect Wallet"
             >
