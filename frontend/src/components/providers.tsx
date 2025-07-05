@@ -44,7 +44,11 @@ export default function Providers({
         onError: (error) => {
           console.error('Privy error:', error);
           // 恢复ethereum对象
-          const win = window as any;
+          interface WindowWithEthereum extends Window {
+            _originalEthereum?: typeof window.ethereum;
+            ethereum?: typeof window.ethereum;
+          }
+          const win = window as WindowWithEthereum;
           if (error.message?.includes('ethereum') && win._originalEthereum) {
             win.ethereum = win._originalEthereum;
             console.log('✅ Recovered ethereum object from error');

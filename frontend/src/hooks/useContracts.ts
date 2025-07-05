@@ -108,9 +108,10 @@ export function useContracts() {
 
         console.log('✅ Contracts initialized successfully');
 
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error('Failed to initialize contracts:', err);
-        setError(err.message || 'Failed to initialize contracts');
+        const errorMessage = err instanceof Error ? err.message : 'Failed to initialize contracts';
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -137,7 +138,7 @@ export function useContracts() {
         usdc: ethers.formatUnits(usdcBalance, USDC_CONFIG.decimals)
       });
 
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to update balances:', err);
     }
   }, [signer, contracts.mockUSDC]);
@@ -180,9 +181,10 @@ export function useContracts() {
       console.log('Partnership created in block:', receipt.blockNumber);
       
       return receipt;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to create partnership:', err);
-      setError(err.message || 'Failed to create partnership');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create partnership';
+      setError(errorMessage);
       throw err;
     } finally {
       setLoading(false);
@@ -212,9 +214,10 @@ export function useContracts() {
       
       await updateBalances();
       return receipt;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to add gratitude:', err);
-      setError(err.message || 'Failed to add gratitude');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to add gratitude';
+      setError(errorMessage);
       throw err;
     } finally {
       setLoading(false);
@@ -242,9 +245,10 @@ export function useContracts() {
       console.log('Goal created in block:', receipt.blockNumber);
       
       return receipt;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to create goal:', err);
-      setError(err.message || 'Failed to create goal');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create goal';
+      setError(errorMessage);
       throw err;
     } finally {
       setLoading(false);
@@ -272,9 +276,10 @@ export function useContracts() {
       console.log('USDC approved in block:', receipt.blockNumber);
       
       return receipt;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to approve USDC:', err);
-      setError(err.message || 'Failed to approve USDC');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to approve USDC';
+      setError(errorMessage);
       throw err;
     } finally {
       setLoading(false);
@@ -308,7 +313,7 @@ export function useContracts() {
       }
 
       return partnerships;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to get partnerships:', err);
       return [];
     }
@@ -335,7 +340,7 @@ export function useContracts() {
       }
 
       return goals;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to get partnership goals:', err);
       return [];
     }

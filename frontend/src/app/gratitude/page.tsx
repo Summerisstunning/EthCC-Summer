@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
-import { useContracts } from '@/hooks/useContracts';
+import { useContracts, Partnership } from '@/hooks/useContracts';
 import UserInfo from '@/components/user-info';
 import BackgroundImage from '@/components/background-image';
 import { MockAPI } from '@/lib/mock-api';
@@ -28,8 +28,8 @@ export default function GratitudePage() {
     { content: '', amount: 0, flowAmount: 0 }
   ]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // 使用更通用的类型定义，避免类型不匹配问题
-  const [partnerships, setPartnerships] = useState<any[]>([]);
+  // 使用明确的Partnership类型，避免any类型
+  const [partnerships, setPartnerships] = useState<Partnership[]>([]);
   const [selectedPartnership, setSelectedPartnership] = useState<number>(0);
 
   // 定义loadPartnerships函数

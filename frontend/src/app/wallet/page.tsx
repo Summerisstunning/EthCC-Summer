@@ -1,14 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
 import BackgroundImage from '@/components/background-image';
 import CrossChainWidget from '@/components/cross-chain-widget';
 import { MockAPI } from '@/lib/mock-api';
 
 export default function WalletPage() {
-  const router = useRouter();
   const { authenticated, ready, login } = usePrivy();
   const [contributionAmount, setContributionAmount] = useState(0);
   const [walletBalance] = useState(150.75); // Mock balance

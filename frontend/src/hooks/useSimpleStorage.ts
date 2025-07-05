@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
 import { 
-  getSimpleStorageContract, 
   storeData as storeDataContract,
   addMessage as addMessageContract,
   updateTokenAmount as updateTokenAmountContract,
@@ -59,8 +58,8 @@ export const useSimpleStorage = (
       // 刷新数据
       const newData = await getMyDataContract(signer);
       setUserData(newData);
-    } catch (err: any) {
-      setError(err);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err : new Error(String(err)));
       throw err;
     } finally {
       setIsLoading(false);
@@ -83,8 +82,8 @@ export const useSimpleStorage = (
       // 刷新数据
       const newData = await getMyDataContract(signer);
       setUserData(newData);
-    } catch (err: any) {
-      setError(err);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err : new Error(String(err)));
       throw err;
     } finally {
       setIsLoading(false);
@@ -107,8 +106,8 @@ export const useSimpleStorage = (
       // 刷新数据
       const newData = await getMyDataContract(signer);
       setUserData(newData);
-    } catch (err: any) {
-      setError(err);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err : new Error(String(err)));
       throw err;
     } finally {
       setIsLoading(false);
@@ -127,8 +126,8 @@ export const useSimpleStorage = (
     try {
       const data = await getUserDataContract(provider, address);
       return data;
-    } catch (err: any) {
-      setError(err);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err : new Error(String(err)));
       throw err;
     } finally {
       setIsLoading(false);
@@ -148,8 +147,8 @@ export const useSimpleStorage = (
       const data = await getMyDataContract(signer);
       setUserData(data);
       return data;
-    } catch (err: any) {
-      setError(err);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err : new Error(String(err)));
       throw err;
     } finally {
       setIsLoading(false);
@@ -164,8 +163,8 @@ export const useSimpleStorage = (
 
     try {
       return await getMessageCountContract(provider, address);
-    } catch (err: any) {
-      setError(err);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err : new Error(String(err)));
       throw err;
     }
   }, [provider]);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { nexus, SUPPORTED_CHAINS, SUPPORTED_TOKENS, type CrossChainTransaction, type UnifiedBalance, type TransactionStatus } from '@/lib/avail-nexus';
 
@@ -22,14 +22,18 @@ export default function CrossChainWidget({ className = '', onSuccess }: CrossCha
   const [txStatus, setTxStatus] = useState<TransactionStatus | null>(null);
   const [showBalances, setShowBalances] = useState(false);
 
-  // 连接到 Avail Nexus
-  useEffect(() => {
-    if (authenticated && user?.wallet?.address && !isConnected) {
-      connectToNexus();
+  // 加载统一余额
+  const loadUnifiedBalances = useCallback(async () => {
+    try {
+      const balances = await nexus.getAllUnifiedBalances();
+      setUnifiedBalances(balances);
+    } catch (err) {
+      console.error('Failed to load balances:', err);
     }
-  }, [authenticated, user, isConnected]);
+  }, []);
 
-  const connectToNexus = async () => {
+  // 定义连接到 Avail Nexus 的函数
+  const connectToNexus = useCallback(async () => {
     if (!user?.wallet?.address) return;
     
     try {
@@ -40,16 +44,14 @@ export default function CrossChainWidget({ className = '', onSuccess }: CrossCha
       console.error('Failed to connect to Nexus:', err);
       setError('Failed to connect to cross-chain service');
     }
-  };
-
-  const loadUnifiedBalances = async () => {
-    try {
-      const balances = await nexus.getAllUnifiedBalances();
-      setUnifiedBalances(balances);
-    } catch (err) {
-      console.error('Failed to load balances:', err);
+  }, [user, loadUnifiedBalances]);
+  
+  // 连接到 Avail Nexus
+  useEffect(() => {
+    if (authenticated && user?.wallet?.address && !isConnected) {
+      connectToNexus();
     }
-  };
+  }, [authenticated, user, isConnected, connectToNexus]);
 
   const handleCrossChainTransfer = async () => {
     if (!amount || parseFloat(amount) <= 0) {
@@ -88,8 +90,9 @@ export default function CrossChainWidget({ className = '', onSuccess }: CrossCha
 
       onSuccess?.(status);
       
-    } catch (err: any) {
-      setError(err.message || 'Cross-chain transfer failed');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Cross-chain transfer failed';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

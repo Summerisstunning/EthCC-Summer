@@ -34,7 +34,11 @@ export default function ClientWrapper({
       });
 
       // 恢复ethereum对象
-      const win = window as any;
+      interface WindowWithEthereum extends Window {
+        _originalEthereum?: typeof window.ethereum;
+        ethereum?: typeof window.ethereum;
+      }
+      const win = window as WindowWithEthereum;
       if (win._originalEthereum && !win.ethereum) {
         win.ethereum = win._originalEthereum;
         console.log('✅ Restored ethereum object');
