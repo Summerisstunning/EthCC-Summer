@@ -1,0 +1,13 @@
+{
+  "network": "flow-mainnet",
+  "contractAddress": "0xf72160761510d6f2bab797a538b9f1099b1b3051",
+  "deployer": "0xFCAd0B19bB29D4674531d6f115237E16AfCE377c",
+  "deployedAt": "2025-07-05T09:56:03.204Z",
+  "chainId": 747,
+  "rpcUrl": "https://mainnet.evm.nodes.onflow.org",
+  "explorer": "https://evm.flowscan.org/address/0xf72160761510d6f2bab797a538b9f1099b1b3051",
+  "status": "DEPLOYED_SUCCESS",
+  "gasUsed": "2,847,293",
+  "gasPrice": "0.000000001 FLOW",
+  "deploymentCost": "0.002847293 FLOW"
+}
