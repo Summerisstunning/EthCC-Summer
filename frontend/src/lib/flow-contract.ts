@@ -1,5 +1,24 @@
 import { ethers } from 'ethers';
 
+// ethers.js v6 中的交易类型
+interface TransactionResponse {
+  hash: string;
+  wait: () => Promise<ethers.TransactionReceipt>;
+}
+
+// 定义合约方法类型
+type ContractMethods = {
+  createPartnership(partnerAddress: string): Promise<TransactionResponse>;
+  depositGratitude(partnershipId: number, message: string, options?: {value: ethers.BigNumberish}): Promise<TransactionResponse>;
+  getPartnership(partnershipId: number): Promise<{[key: string]: unknown}>;
+  getPartnershipGoals(partnershipId: number): Promise<{[key: string]: unknown}[]>;
+  createGoal(partnershipId: number, name: string, targetAmount: ethers.BigNumberish): Promise<TransactionResponse>;
+  contributeToGoal(partnershipId: number, goalId: number, options?: {value: ethers.BigNumberish}): Promise<TransactionResponse>;
+  contributeToPartnership(partnershipId: number, options?: {value: ethers.BigNumberish}): Promise<TransactionResponse>;
+  totalPartnerships(): Promise<bigint>;
+  partnerships(index: number): Promise<{[key: string]: unknown}>;
+}
+
 // Flow EVM Configuration
 export const FLOW_MAINNET_CONFIG = {
   chainId: 747,
@@ -104,7 +123,7 @@ export const AASHARING_ABI = [
 // Flow Contract Service
 export class FlowContractService {
   private provider: ethers.JsonRpcProvider;
-  private contract: ethers.Contract;
+  private contract: ethers.Contract & ContractMethods;
 
   constructor() {
     this.provider = new ethers.JsonRpcProvider(FLOW_MAINNET_CONFIG.rpcUrl);
@@ -112,17 +131,17 @@ export class FlowContractService {
       FLOW_MAINNET_CONFIG.contractAddress!,
       AASHARING_ABI,
       this.provider
-    );
+    ) as ethers.Contract & ContractMethods;
   }
 
   // Connect with user wallet
-  async connectWallet(signer: ethers.Signer) {
-    return this.contract.connect(signer);
+  async connectWallet(signer: ethers.Signer): Promise<ethers.Contract & ContractMethods> {
+    return this.contract.connect(signer) as ethers.Contract & ContractMethods;
   }
 
   // Create a new partnership
   async createPartnership(signer: ethers.Signer, partnerAddress: string) {
-    const contractWithSigner = this.contract.connect(signer);
+    const contractWithSigner = this.contract.connect(signer) as ethers.Contract & ContractMethods;
     const tx = await contractWithSigner.createPartnership(partnerAddress);
     return await tx.wait();
   }
@@ -131,47 +150,40 @@ export class FlowContractService {
   async depositGratitude(
     signer: ethers.Signer,
     partnershipId: number,
-    content: string,
-    flowAmount: string = '0'
+    message: string,
+    value: ethers.BigNumberish = 0
   ) {
-    const contractWithSigner = this.contract.connect(signer);
-    const tx = await contractWithSigner.depositGratitude(
-      partnershipId,
-      content,
-      { value: ethers.parseEther(flowAmount) }
-    );
+    const contractWithSigner = this.contract.connect(signer) as ethers.Contract & ContractMethods;
+    const options = value ? { value } : undefined;
+    const tx = await contractWithSigner.depositGratitude(partnershipId, message, options);
     return await tx.wait();
   }
 
-  // Create a shared goal
+  // Create a new goal for a partnership
   async createGoal(
     signer: ethers.Signer,
     partnershipId: number,
     name: string,
-    description: string,
-    targetAmount: string
+    targetAmount: ethers.BigNumberish
   ) {
-    const contractWithSigner = this.contract.connect(signer);
+    const contractWithSigner = this.contract.connect(signer) as ethers.Contract & ContractMethods;
     const tx = await contractWithSigner.createGoal(
       partnershipId,
       name,
-      description,
-      ethers.parseEther(targetAmount)
+      targetAmount
     );
     return await tx.wait();
   }
 
-  // Contribute to partnership
+  // Contribute to a partnership (general contribution)
   async contributeToPartnership(
     signer: ethers.Signer,
     partnershipId: number,
-    flowAmount: string
+    value: ethers.BigNumberish
   ) {
-    const contractWithSigner = this.contract.connect(signer);
-    const tx = await contractWithSigner.contributeToPartnership(
-      partnershipId,
-      { value: ethers.parseEther(flowAmount) }
-    );
+    const contractWithSigner = this.contract.connect(signer) as ethers.Contract & ContractMethods;
+    const options = { value };
+    const tx = await contractWithSigner.contributeToPartnership(partnershipId, options);
     return await tx.wait();
   }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { PrivyProvider } from '@privy-io/react-auth';
+import { PrivyErrorHandler } from './privy-error-handler';
 
 export default function Providers({
   children,
@@ -40,22 +41,10 @@ export default function Providers({
               },
             },
           },
-        ],
-        onError: (error) => {
-          console.error('Privy error:', error);
-          // 恢复ethereum对象
-          interface WindowWithEthereum extends Window {
-            _originalEthereum?: typeof window.ethereum;
-            ethereum?: typeof window.ethereum;
-          }
-          const win = window as WindowWithEthereum;
-          if (error.message?.includes('ethereum') && win._originalEthereum) {
-            win.ethereum = win._originalEthereum;
-            console.log('✅ Recovered ethereum object from error');
-          }
-        }
+        ]
       }}
     >
+      <PrivyErrorHandler />
       {children}
     </PrivyProvider>
   );

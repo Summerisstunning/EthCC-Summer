@@ -31,20 +31,28 @@ export default function DashboardPage() {
 
   const progressPercentage = (currentGoal.currentAmount / currentGoal.targetAmount) * 100;
 
+  const loadPartnerships = useCallback(async () => {
+    try {
+      const userPartnerships = await getPartnerships();
+      // 将id从number转换为string，balance从bigint转换为string，goalCount从bigint转换为number
+      const formattedPartnerships = userPartnerships.map(p => ({
+        ...p,
+        id: p.id.toString(),
+        balance: p.balance.toString(),
+        goalCount: Number(p.goalCount)
+      }));
+      setPartnerships(formattedPartnerships);
+    } catch (err) {
+      console.error('Failed to load partnerships:', err);
+    }
+  }, [getPartnerships]);
+
+  // 在定义loadPartnerships后使用useEffect
   useEffect(() => {
     if (contractsReady) {
       loadPartnerships();
     }
   }, [contractsReady, loadPartnerships]);
-
-  const loadPartnerships = useCallback(async () => {
-    try {
-      const userPartnerships = await getPartnerships();
-      setPartnerships(userPartnerships);
-    } catch (err) {
-      console.error('Failed to load partnerships:', err);
-    }
-  }, [getPartnerships]);
 
   const handleCreatePartnership = async () => {
     if (!newPartnerAddress.trim()) {
