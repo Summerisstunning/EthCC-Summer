@@ -88,8 +88,12 @@ export default function GratitudePage() {
   }
 
   return (
-    <BackgroundImage src="/images/gratitude-bg.jpg" alt="Gratitude background">
-      <div className="p-4 min-h-screen">
+    <BackgroundImage 
+      src="/images/gratitude-bg.png" 
+      alt="Bali beauty - Gratitude inspiration"
+      overlayIntensity="medium"
+    >
+      <div className="p-4 pt-20 min-h-screen">
         <div className="max-w-2xl mx-auto py-8">
         <UserInfo />
         <div className="bg-white rounded-2xl shadow-lg p-8">

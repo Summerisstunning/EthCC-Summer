@@ -49,8 +49,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <BackgroundImage src="/images/dashboard-bg.jpg" alt="Dashboard background">
-      <div className="p-4 min-h-screen">
+    <BackgroundImage 
+      src="/images/dashboard-bg.png" 
+      alt="Cannes elegance - Celebrating achievements"
+      overlayIntensity="medium"
+    >
+      <div className="p-4 pt-20 min-h-screen">
         <div className="max-w-4xl mx-auto py-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <div className="flex justify-between items-center mb-8">

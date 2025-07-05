@@ -30,8 +30,12 @@ export default function Home() {
   }
 
   return (
-    <BackgroundImage src="/images/hero-bg.jpg" alt="Hero background">
-      <div className="flex items-center justify-center p-4 min-h-screen">
+    <BackgroundImage 
+      src="/images/hero-bg.png" 
+      alt="Bali - Dream destination background"
+      overlayIntensity="light"
+    >
+      <div className="flex items-center justify-center p-4 pt-20 min-h-screen">
         <div className="max-w-4xl mx-auto text-center">
         <div className="mb-8">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">

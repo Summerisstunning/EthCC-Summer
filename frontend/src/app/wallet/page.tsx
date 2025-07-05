@@ -67,8 +67,12 @@ export default function WalletPage() {
   }
 
   return (
-    <BackgroundImage src="/images/wallet-bg.jpg" alt="Wallet background">
-      <div className="p-4 min-h-screen">
+    <BackgroundImage 
+      src="/images/wallet-bg.png" 
+      alt="Beijing memories - Growing together"
+      overlayIntensity="medium"
+    >
+      <div className="p-4 pt-20 min-h-screen">
         <div className="max-w-2xl mx-auto py-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Shared Wallet Contribution</h1>
