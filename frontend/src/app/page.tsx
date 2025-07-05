@@ -2,16 +2,23 @@
 
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
+import { useContracts } from '@/hooks/useContracts';
 import BackgroundImage from '@/components/background-image';
 
 export default function Home() {
   const router = useRouter();
   const { login, authenticated, ready } = usePrivy();
+  const { ready: contractsReady, balances, error } = useContracts();
 
   const handleStartRecording = () => {
+    console.log('🎯 Start Recording clicked, authenticated:', authenticated);
+    
     if (authenticated) {
-      router.push('/gratitude');
+      console.log('✅ User authenticated, navigating to /gratitude');
+      // Use window.location for reliable navigation
+      window.location.href = '/gratitude';
     } else {
+      console.log('🔐 User not authenticated, showing login');
       login();
     }
   };
@@ -60,12 +67,47 @@ export default function Home() {
             Start Recording Gratitude
           </button>
           <button 
-            onClick={handleJoinWaitlist}
+            onClick={() => window.location.href = '/quick-partnership'}
             className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300"
           >
-            Join the Waitlist
+            Create Partnership
           </button>
         </div>
+        
+        {/* Additional Options */}
+        <div className="mt-6 flex justify-center gap-4">
+          <button 
+            onClick={() => window.location.href = '/test-storage'}
+            className="text-purple-600 hover:text-purple-800 underline text-sm"
+          >
+            Test Storage
+          </button>
+          <button 
+            onClick={handleJoinWaitlist}
+            className="text-purple-600 hover:text-purple-800 underline text-sm"
+          >
+            Join Waitlist
+          </button>
+        </div>
+        
+        {authenticated && contractsReady && (
+          <div className="mt-8 p-4 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Wallet Status</h3>
+            <div className="flex justify-center gap-6 text-sm">
+              <div>
+                <span className="text-gray-600">FLOW:</span>{' '}
+                <span className="font-semibold text-purple-700">{parseFloat(balances.flow).toFixed(4)}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">USDC:</span>{' '}
+                <span className="font-semibold text-green-700">{parseFloat(balances.usdc).toFixed(2)}</span>
+              </div>
+            </div>
+            {error && (
+              <p className="text-red-600 text-xs mt-2">⚠️ {error}</p>
+            )}
+          </div>
+        )}
         
         <div className="mt-12 text-sm text-gray-500">
           <p>Built with Flow, Privy, and Avail Nexus</p>

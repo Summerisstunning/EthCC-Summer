@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
+import { useContracts } from '@/hooks/useContracts';
 import BackgroundImage from '@/components/background-image';
 import CrossChainHistory from '@/components/cross-chain-history';
 import { MockAPI } from '@/lib/mock-api';
@@ -10,6 +11,18 @@ import { MockAPI } from '@/lib/mock-api';
 export default function DashboardPage() {
   const router = useRouter();
   const { authenticated, ready, logout, login } = usePrivy();
+  const { 
+    ready: contractsReady, 
+    createPartnership, 
+    getPartnerships, 
+    balances, 
+    loading, 
+    error 
+  } = useContracts();
+  
+  const [partnerships, setPartnerships] = useState<any[]>([]);
+  const [newPartnerAddress, setNewPartnerAddress] = useState('');
+  const [isCreatingPartnership, setIsCreatingPartnership] = useState(false);
   const [walletBalance] = useState(215.75); // Mock balance after contribution
   const [currentGoal] = useState({
     name: 'Trip to Bali',
@@ -19,9 +32,49 @@ export default function DashboardPage() {
 
   const progressPercentage = (currentGoal.currentAmount / currentGoal.targetAmount) * 100;
 
+  useEffect(() => {
+    if (contractsReady) {
+      loadPartnerships();
+    }
+  }, [contractsReady]);
+
+  const loadPartnerships = async () => {
+    try {
+      const userPartnerships = await getPartnerships();
+      setPartnerships(userPartnerships);
+    } catch (err) {
+      console.error('Failed to load partnerships:', err);
+    }
+  };
+
+  const handleCreatePartnership = async () => {
+    if (!newPartnerAddress.trim()) {
+      alert('Please enter a valid partner address');
+      return;
+    }
+
+    if (!newPartnerAddress.match(/^0x[a-fA-F0-9]{40}$/)) {
+      alert('Please enter a valid Ethereum address (0x...)');
+      return;
+    }
+
+    setIsCreatingPartnership(true);
+    try {
+      await createPartnership(newPartnerAddress);
+      alert('✅ Partnership created successfully!');
+      setNewPartnerAddress('');
+      await loadPartnerships();
+    } catch (error: any) {
+      console.error('Failed to create partnership:', error);
+      alert(`Failed to create partnership: ${error.message || 'Please try again'}`);
+    } finally {
+      setIsCreatingPartnership(false);
+    }
+  };
+
   const handleLogout = () => {
     logout();
-    router.push('/');
+    window.location.href = '/';
   };
 
   if (!ready) {
@@ -51,7 +104,7 @@ export default function DashboardPage() {
                 🔗 Connect Wallet
               </button>
               <button
-                onClick={() => router.push('/')}
+                onClick={() => () => window.location.href =('/')}
                 className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors"
               >
                 Back to Home
@@ -73,13 +126,99 @@ export default function DashboardPage() {
         <div className="max-w-4xl mx-auto py-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Shared Wallet Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Partnership Dashboard</h1>
             <button
               onClick={handleLogout}
               className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
             >
               Logout
             </button>
+          </div>
+
+          {/* Wallet Status */}
+          {contractsReady && (
+            <div className="mb-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="font-semibold text-purple-800">Blockchain Wallet</h3>
+                  <div className="text-sm text-purple-700">
+                    FLOW: {parseFloat(balances.flow).toFixed(4)} | USDC: {parseFloat(balances.usdc).toFixed(2)}
+                  </div>
+                </div>
+                <div className="text-xs text-purple-600">
+                  {partnerships.length} Partnership{partnerships.length !== 1 ? 's' : ''}
+                </div>
+              </div>
+              {error && (
+                <p className="text-red-600 text-xs mt-2">⚠️ {error}</p>
+              )}
+            </div>
+          )}
+
+          {/* Create Partnership Section */}
+          <div className="mb-8 p-6 border border-gray-200 rounded-lg">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Create New Partnership</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Partner's Wallet Address
+                </label>
+                <input
+                  type="text"
+                  value={newPartnerAddress}
+                  onChange={(e) => setNewPartnerAddress(e.target.value)}
+                  placeholder="0x..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Enter your partner's Ethereum wallet address to create a shared partnership for recording gratitude and achieving goals together.
+                </p>
+              </div>
+              <button
+                onClick={handleCreatePartnership}
+                disabled={!contractsReady || isCreatingPartnership || loading}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isCreatingPartnership ? 'Creating Partnership...' : 'Create Partnership'}
+              </button>
+            </div>
+          </div>
+
+          {/* Existing Partnerships */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Your Partnerships</h3>
+            {partnerships.length === 0 ? (
+              <div className="text-center py-8 bg-gray-50 rounded-lg">
+                <p className="text-gray-500 mb-4">No partnerships yet.</p>
+                <p className="text-sm text-gray-400">Create your first partnership above to start recording gratitude together!</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {partnerships.map((partnership) => (
+                  <div 
+                    key={partnership.id}
+                    className="p-4 border border-gray-200 rounded-lg hover:border-purple-300 transition-colors"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Partnership #{partnership.id}</h4>
+                        <p className="text-sm text-gray-600">
+                          {partnership.partner1.slice(0, 6)}...{partnership.partner1.slice(-4)} & {partnership.partner2.slice(0, 6)}...{partnership.partner2.slice(-4)}
+                        </p>
+                        <p className="text-xs text-purple-600 mt-1">
+                          {partnership.goalCount.toString()} goals • Active: {partnership.active ? 'Yes' : 'No'}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-semibold text-green-600">
+                          Balance: {(Number(partnership.balance) / 1e18).toFixed(4)} FLOW
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -116,19 +255,28 @@ export default function DashboardPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Quick Actions */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <button
-              onClick={() => router.push('/gratitude')}
+              onClick={() => window.location.href = '/gratitude'}
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
+              disabled={partnerships.length === 0}
             >
-              Add More Gratitude
+              Record Gratitude
             </button>
             
             <button
-              onClick={() => router.push('/wallet')}
+              onClick={() => window.location.href = '/wallet'}
               className="w-full border-2 border-purple-600 text-purple-600 py-4 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300"
             >
-              Make Contribution
+              Manage Wallet
+            </button>
+
+            <button
+              onClick={() => window.location.href = '/'}
+              className="w-full border-2 border-gray-300 text-gray-600 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-300"
+            >
+              Back to Home
             </button>
           </div>
           

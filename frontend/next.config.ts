@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
               font-src 'self' https://fonts.gstatic.com;
               img-src 'self' data: https:;
-              connect-src 'self' https://*.privy.io https://mainnet.evm.nodes.onflow.org https://eth-mainnet.g.alchemy.com https://verify.walletconnect.com wss://relay.walletconnect.com;
+              connect-src 'self' https://*.privy.io https://mainnet.evm.nodes.onflow.org https://eth-mainnet.g.alchemy.com https://verify.walletconnect.com https://pulse.walletconnect.org https://api.web3modal.org https://explorer-api.walletconnect.com wss://relay.walletconnect.com;
               frame-src https://auth.privy.io https://*.privy.io;
             `.replace(/\s+/g, ' ').trim()
           }

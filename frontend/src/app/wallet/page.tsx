@@ -33,7 +33,7 @@ export default function WalletPage() {
         status: 'confirmed',
       });
       
-      router.push('/dashboard');
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Contribution failed:', error);
       alert('贡献失败，请重试');
@@ -69,7 +69,7 @@ export default function WalletPage() {
                 🔗 Connect Wallet
               </button>
               <button
-                onClick={() => router.push('/')}
+                onClick={() => () => window.location.href =('/')}
                 className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors"
               >
                 Back to Home
@@ -140,7 +140,7 @@ export default function WalletPage() {
           
           <div className="mt-8 flex justify-between">
             <button
-              onClick={() => router.push('/gratitude')}
+              onClick={() => () => window.location.href =('/gratitude')}
               className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
             >
               Back

@@ -80,6 +80,7 @@ Integration Requirements:
 
 Wallet Balance Display: Display the current wallet balance from Flow smart contract.
 
+
 Amount Field: Users should be able to specify how much to contribute.
 
 Button: After confirmation, update the wallet balance and navigate to the Shared Wallet and Goal Display Page.
@@ -136,6 +137,7 @@ Store contributions in a shared wallet and manage funds.
 Implement goal-based funding (e.g., travel funds).
 
 Balance Split: In case of a relationship break-up, automatically split the wallet balance between both parties.
+
 
 Flow Smart Contract Code Example (Cadence):
 

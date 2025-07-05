@@ -53,3 +53,494 @@ Navigation component state: { pathname: '/', authenticated: false, ready: false 
  GET / 200 in 609ms
  GET /favicon.ico?favicon.45db1c09.ico 200 in 403ms
  GET /favicon.ico?favicon.45db1c09.ico 200 in 327ms
+ GET / 200 in 195ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 820ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1456ms
+ GET / 200 in 90ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 305ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1617ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload when ./src/components/extension-blocker.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 698ms
+ GET / 200 in 955ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 329ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 320ms
+ HEAD / 200 in 257ms
+ ✓ Compiled in 1073ms
+ ○ Compiling / ...
+ ✓ Compiled in 23s
+ ✓ Compiled / in 9.8s
+ GET / 200 in 13493ms
+ GET / 200 in 4212ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1031ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 761ms
+ HEAD / 200 in 1026ms
+ GET / 200 in 190ms
+ GET / 200 in 154ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 349ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 14915ms
+ HEAD / 200 in 19041ms
+ GET / 200 in 12793ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 692ms
+ HEAD / 200 in 12860ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 3199ms
+ ○ Compiling /gratitude ...
+ ✓ Compiled in 173.6s
+ ✓ Compiled /gratitude in 177.7s
+ GET /dashboard 200 in 170785ms
+ GET /gratitude 200 in 159364ms
+ GET /gratitude 200 in 180871ms
+ GET /wallet 200 in 174067ms
+ GET /gratitude 200 in 157764ms
+ GET /gratitude 200 in 159268ms
+ GET /wallet 200 in 4397ms
+ GET /wallet 200 in 4413ms
+ GET /wallet 200 in 4396ms
+ GET /wallet 200 in 4506ms
+ GET /wallet 200 in 4552ms
+ GET /gratitude 200 in 7667ms
+ GET /gratitude 200 in 3041ms
+ GET /gratitude 200 in 3199ms
+ GET /gratitude 200 in 3162ms
+ GET /gratitude 200 in 3187ms
+ GET /gratitude 200 in 3160ms
+ GET /gratitude 200 in 1108ms
+ GET /gratitude 200 in 1418ms
+ GET /gratitude 200 in 1315ms
+ GET /gratitude 200 in 1314ms
+ GET /gratitude 200 in 1315ms
+ GET /gratitude 200 in 1523ms
+ GET /gratitude 200 in 2128ms
+ GET /gratitude 200 in 2589ms
+ GET /gratitude 200 in 2890ms
+ GET /gratitude 200 in 2637ms
+ ✓ Compiled in 326ms
+ ✓ Compiled in 675ms
+ GET /wallet 200 in 2881ms
+ GET /wallet 200 in 1659ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1345ms
+ HEAD /wallet 200 in 14275ms
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+ ⨯ [TypeError: Cannot read properties of null (reading 'use')] {
+  digest: '2554432074'
+}
+ GET /dashboard 200 in 11589ms
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+ ⨯ [TypeError: Cannot read properties of null (reading 'useContext')] {
+  digest: '2219455136'
+}
+ ⨯ TypeError: Cannot read properties of null (reading 'useState')
+    at ClientWrapper (src/components/client-wrapper.tsx:13:61)
+  11 |   children: React.ReactNode;
+  12 | }) {
+> 13 |   const [isCleanupComplete, setIsCleanupComplete] = useState(false);
+     |                                                             ^
+  14 |
+  15 |   useEffect(() => {
+  16 |     // 额外的客户端清理 {
+  digest: '920502449'
+}
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[TypeError: Cannot read properties of null (reading 'use')]
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[TypeError: Cannot read properties of null (reading 'use')]
+ GET /dashboard 200 in 6212ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 400ms
+ HEAD /dashboard 200 in 215ms
+ GET / 200 in 715ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 2061ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 3149ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 350ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 324ms
+ GET / 200 in 57309ms
+ GET / 200 in 30750ms
+ GET /gratitude 200 in 7295ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 291ms
+ HEAD /gratitude 200 in 231ms
+ GET /wallet 200 in 8244ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1338ms
+ HEAD /wallet 200 in 7165ms
+ GET /dashboard 200 in 373ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 488ms
+ HEAD /dashboard 200 in 7460ms
+ GET / 200 in 1082ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 5110ms
+ HEAD / 200 in 7389ms
+ ○ Compiling /_not-found/page ...
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://172.31.48.79:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 4.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 89.9s
+(node:45939) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ GET / 200 in 29030ms
+ ○ Compiling /favicon.ico ...
+ HEAD / 200 in 4282ms
+ ✓ Compiled /favicon.ico in 11.7s
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 11998ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 416ms
+ GET / 200 in 138ms
+ GET / 200 in 451ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 550ms
+ HEAD / 200 in 11822ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 11011ms
+ ○ Compiling /_not-found/page ...
+ GET / 200 in 6279ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 7260ms
+ HEAD / 200 in 7386ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 5014ms
+ ✓ Compiled /_not-found/page in 69.3s
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 70499ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 404ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://172.31.48.79:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1371ms
+ ○ Compiling / ...
+ ✓ Compiled / in 44.9s
+(node:46209) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ GET / 200 in 47181ms
+ ○ Compiling /_not-found/page ...
+ HEAD / 200 in 8497ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 30358ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 713ms
+ ✓ Compiled /_not-found/page in 75.8s
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 79080ms
+ GET / 200 in 484ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 3279ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 7810ms
+ HEAD / 200 in 7353ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 3852ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://172.31.48.79:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1642ms
+ ○ Compiling / ...
+ ✓ Compiled / in 23s
+(node:46460) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ GET / 200 in 23798ms
+ ○ Compiling /_not-found/page ...
+ HEAD / 200 in 9293ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 31614ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1448ms
+ ✓ Compiled /_not-found/page in 80s
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 82612ms
+ ○ Compiling / ...
+ ✓ Compiled in 9.1s
+ ✓ Compiled / in 6.9s
+ GET / 200 in 12815ms
+ GET / 200 in 1665ms
+ ✓ Compiled in 5.7s
+ ○ Compiling /gratitude ...
+ ✓ Compiled /gratitude in 29.2s
+ GET /gratitude 200 in 35718ms
+ ○ Compiling /_not-found/page ...
+ ✓ Compiled /_not-found/page in 790ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 5996ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 42410ms
+ ○ Compiling /wallet ...
+ HEAD /gratitude 200 in 53385ms
+ ✓ Compiled /wallet in 40.9s
+ GET /wallet 200 in 42106ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 3708ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1423ms
+ HEAD /wallet 200 in 1656ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 48s
+ GET /dashboard 200 in 50230ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 3711ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 13382ms
+ HEAD /dashboard 200 in 12984ms
+ GET /wallet 200 in 375ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 935ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 246ms
+ HEAD /wallet 200 in 12188ms
+ GET /gratitude 200 in 911ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 286ms
+ GET /wallet 200 in 780ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 333ms
+ HEAD /wallet 200 in 8137ms
+ GET / 200 in 2452ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 307ms
+ HEAD / 200 in 13285ms
+ GET /gratitude 200 in 3218ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 595ms
+ HEAD /gratitude 200 in 15911ms
+ GET /wallet 200 in 6304ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 433ms
+ HEAD /wallet 200 in 12630ms
+ GET /dashboard 200 in 7876ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 9249ms
+ HEAD /dashboard 200 in 8796ms
+ GET /wallet 200 in 813ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 294ms
+ HEAD /wallet 200 in 644ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1013ms
+ ✓ Compiled in 738ms
+ ✓ Compiled in 715ms
+ GET / 200 in 4690ms
+ GET / 200 in 18250ms
+ GET / 200 in 24025ms
+ GET /dashboard 200 in 34341ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 856ms
+ HEAD /dashboard 200 in 60828ms
+ ✓ Compiled in 1974ms
+ GET /dashboard 200 in 7293ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1460ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 5115ms
+ HEAD /dashboard 200 in 15836ms
+ GET / 200 in 733ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 1503ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 45330ms
+ HEAD / 200 in 65660ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 29201ms
+ GET / 200 in 9130ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 9687ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 17527ms
+ HEAD / 200 in 24499ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 9395ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 2689ms
+ GET / 200 in 459ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 731ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1714ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 44817ms
+ HEAD / 200 in 59402ms
+ GET /gratitude 200 in 9628ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 2061ms
+ HEAD /gratitude 200 in 17315ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 33755ms
+ GET /gratitude 200 in 678ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 299ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 18673ms
+ HEAD /gratitude 200 in 13205ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 2136ms
+ GET /wallet 200 in 1164ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 266ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1138ms
+ HEAD /wallet 200 in 27142ms
+ GET /dashboard 200 in 19143ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 21027ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 29814ms
+ HEAD /dashboard 200 in 28028ms
+ GET / 200 in 9287ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 8708ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 19525ms
+ HEAD / 200 in 17117ms
+ GET / 200 in 448ms
+ GET /gratitude 200 in 1169ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 2563ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 48631ms
+ HEAD /gratitude 200 in 47495ms
+ ✓ Compiled in 18.6s
+ ✓ Compiled in 1054ms
+ ✓ Compiled in 3.5s
+ ✓ Compiled in 905ms
+ ✓ Compiled in 260ms
+ GET /dashboard 200 in 7270ms
+ GET /gratitude 200 in 7413ms
+ GET /gratitude 200 in 1071ms
+ GET /dashboard 200 in 1251ms
+ ✓ Compiled in 2.7s
+ ✓ Compiled in 1136ms
+ ✓ Compiled in 6.2s
+ ✓ Compiled in 20ms
+ GET /gratitude 200 in 3100ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 3130ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 5268ms
+ HEAD /gratitude 200 in 6610ms
+ GET / 200 in 4562ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 2800ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 15033ms
+ HEAD / 200 in 13534ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 3481ms
+ GET / 200 in 256ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 530ms
+ GET /gratitude 200 in 1166ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 2220ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 17251ms
+ HEAD /gratitude 200 in 5397ms
+ ✓ Compiled in 7.3s
+ ✓ Compiled in 1914ms
+ ✓ Compiled in 7.7s
+ ✓ Compiled in 545ms
+ GET /gratitude 200 in 18432ms
+ GET /dashboard 200 in 18541ms
+ GET /dashboard 200 in 1233ms
+ GET /gratitude 200 in 1509ms
+ ✓ Compiled in 4.6s
+ ✓ Compiled in 227ms
+ GET / 200 in 5612ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 564ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 496ms
+ GET /gratitude 200 in 7240ms
+ HEAD / 200 in 15241ms
+ GET /gratitude 200 in 3834ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 38915ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 35870ms
+ HEAD /gratitude 200 in 41301ms
+ ✓ Compiled in 4.4s
+ ✓ Compiled in 293ms
+ GET /dashboard 200 in 7158ms
+ GET /dashboard 200 in 2240ms
+ ✓ Compiled in 2.1s
+ ✓ Compiled in 1252ms
+ ✓ Compiled in 526ms
+ ✓ Compiled in 703ms
+ ✓ Compiled in 1667ms
+ ✓ Compiled in 1462ms
+ ✓ Compiled in 1ms
+ GET /dashboard 200 in 1569ms
+ GET /dashboard 200 in 239ms
+ ✓ Compiled in 435ms
+ ✓ Compiled in 434ms
+ ✓ Compiled in 534ms
+ ✓ Compiled in 566ms
+ ✓ Compiled in 290ms
+ GET / 200 in 6995ms
+ ○ Compiling /quick-partnership ...
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 13730ms
+ HEAD / 200 in 23579ms
+ ✓ Compiled /quick-partnership in 411.6s
+ GET /quick-partnership 200 in 439563ms
+ HEAD /quick-partnership 200 in 30121ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 53397ms
+ GET /images/partnership-bg.png 404 in 54823ms
+ GET /gratitude 200 in 9654ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 40788ms
+ HEAD /gratitude 200 in 29473ms
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+ ⨯ [TypeError: Cannot read properties of null (reading 'use')] {
+  digest: '2554432074'
+}
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+ ⨯ [TypeError: Cannot read properties of null (reading 'useContext')] {
+  digest: '2219455136'
+}
+ ⨯ TypeError: Cannot read properties of null (reading 'useEffect')
+    at ClientWrapper (src/components/client-wrapper.tsx:13:12)
+  11 |   children: React.ReactNode;
+  12 | }) {
+> 13 |   useEffect(() => {
+     |            ^
+  14 |     // 客户端清理扩展污染
+  15 |     const cleanupExtensions = () => {
+  16 |       console.log('🧹 Client cleanup starting...'); {
+  digest: '285039032'
+}
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[TypeError: Cannot read properties of null (reading 'use')]
+Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://react.dev/link/invalid-hook-call for tips about how to debug and fix this problem.
+[TypeError: Cannot read properties of null (reading 'use')]
+ GET /gratitude 200 in 49681ms
+ GET /dashboard 500 in 66019ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 154217ms
+ ⨯ Error: Module [project]/node_modules/next/dist/client/components/error-boundary.js [app-ssr] (ecmascript) was instantiated because it was required from module [project]/node_modules/next/dist/esm/build/templates/app-page.js?page=/dashboard/page { METADATA_0 => "[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript, Next.js server component)", MODULE_1 => "[project]/src/app/layout.tsx [app-rsc] (ecmascript, Next.js server component)", MODULE_2 => "[project]/node_modules/next/dist/client/components/not-found-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_3 => "[project]/node_modules/next/dist/client/components/forbidden-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_4 => "[project]/node_modules/next/dist/client/components/unauthorized-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_5 => "[project]/src/app/dashboard/page.tsx [app-rsc] (ecmascript, Next.js server component)" } [app-rsc] (ecmascript) <locals>, but the module factory is not available. It might have been deleted in an HMR update.
+    at JSON.parse (<anonymous>) {
+  digest: '3597155198'
+}
+Error: Module [project]/node_modules/next/dist/client/components/error-boundary.js [app-ssr] (ecmascript) was instantiated because it was required from module [project]/node_modules/next/dist/esm/build/templates/app-page.js?page=/dashboard/page { METADATA_0 => "[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript, Next.js server component)", MODULE_1 => "[project]/src/app/layout.tsx [app-rsc] (ecmascript, Next.js server component)", MODULE_2 => "[project]/node_modules/next/dist/client/components/not-found-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_3 => "[project]/node_modules/next/dist/client/components/forbidden-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_4 => "[project]/node_modules/next/dist/client/components/unauthorized-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_5 => "[project]/src/app/dashboard/page.tsx [app-rsc] (ecmascript, Next.js server component)" } [app-rsc] (ecmascript) <locals>, but the module factory is not available. It might have been deleted in an HMR update.
+    at JSON.parse (<anonymous>)
+ ⨯ Error: Module [project]/node_modules/next/dist/client/components/error-boundary.js [app-ssr] (ecmascript) was instantiated because it was required from module [project]/node_modules/next/dist/esm/build/templates/app-page.js?page=/dashboard/page { METADATA_0 => "[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript, Next.js server component)", MODULE_1 => "[project]/src/app/layout.tsx [app-rsc] (ecmascript, Next.js server component)", MODULE_2 => "[project]/node_modules/next/dist/client/components/not-found-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_3 => "[project]/node_modules/next/dist/client/components/forbidden-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_4 => "[project]/node_modules/next/dist/client/components/unauthorized-error.js [app-rsc] (ecmascript, Next.js server component)", MODULE_5 => "[project]/src/app/dashboard/page.tsx [app-rsc] (ecmascript, Next.js server component)" } [app-rsc] (ecmascript) <locals>, but the module factory is not available. It might have been deleted in an HMR update.
+    at JSON.parse (<anonymous>) {
+  page: '/dashboard'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 161.7s
+ HEAD /dashboard 500 in 231989ms
+ GET /gratitude 200 in 1288ms
+ GET / 200 in 446ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 43439ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 32390ms
+ HEAD / 200 in 40999ms
+ GET /quick-partnership 200 in 39081ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 39882ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 56125ms
+ GET /images/partnership-bg.png 404 in 55064ms
+ HEAD /quick-partnership 200 in 57727ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 6575ms
+ GET / 200 in 859ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 269ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 291ms
+ HEAD / 200 in 12503ms
+ GET /quick-partnership 200 in 14427ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 17930ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 21181ms
+ HEAD /quick-partnership 200 in 22501ms
+ GET /images/partnership-bg.png 404 in 21732ms
+ GET / 200 in 1036ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 336ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 307ms
+ HEAD / 200 in 23495ms
+ ○ Compiling /storage ...
+ GET /quick-partnership 200 in 30568ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 71904ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 152735ms
+ GET /images/partnership-bg.png 404 in 60496ms
+ HEAD /quick-partnership 200 in 75095ms
+ GET / 200 in 70048ms
+ HEAD / 200 in 17552ms
+ GET /gratitude 200 in 22178ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 23553ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 26835ms
+ HEAD /gratitude 200 in 12339ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 9764ms
+[?25h

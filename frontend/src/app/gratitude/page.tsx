@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
+import { useContracts } from '@/hooks/useContracts';
 import UserInfo from '@/components/user-info';
 import BackgroundImage from '@/components/background-image';
 import { MockAPI } from '@/lib/mock-api';
@@ -10,19 +11,47 @@ import { MockAPI } from '@/lib/mock-api';
 interface GratitudeItem {
   content: string;
   amount: number;
+  flowAmount: number;
 }
 
 export default function GratitudePage() {
   const router = useRouter();
   const { authenticated, ready, user, login } = usePrivy();
+  const { 
+    ready: contractsReady, 
+    addGratitude, 
+    getPartnerships, 
+    balances, 
+    loading, 
+    error 
+  } = useContracts();
+  
   const [gratitudeItems, setGratitudeItems] = useState<GratitudeItem[]>([
-    { content: '', amount: 0 }
+    { content: '', amount: 0, flowAmount: 0 }
   ]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [partnerships, setPartnerships] = useState<any[]>([]);
+  const [selectedPartnership, setSelectedPartnership] = useState<number>(0);
+
+  // Load partnerships when contracts are ready
+  useEffect(() => {
+    if (contractsReady) {
+      loadPartnerships();
+    }
+  }, [contractsReady]);
+
+  const loadPartnerships = async () => {
+    try {
+      const userPartnerships = await getPartnerships();
+      setPartnerships(userPartnerships);
+    } catch (err) {
+      console.error('Failed to load partnerships:', err);
+    }
+  };
 
   const addGratitudeItem = () => {
     if (gratitudeItems.length < 3) {
-      setGratitudeItems([...gratitudeItems, { content: '', amount: 0 }]);
+      setGratitudeItems([...gratitudeItems, { content: '', amount: 0, flowAmount: 0 }]);
     }
   };
 
@@ -32,7 +61,7 @@ export default function GratitudePage() {
     }
   };
 
-  const updateGratitudeItem = (index: number, field: 'content' | 'amount', value: string | number) => {
+  const updateGratitudeItem = (index: number, field: 'content' | 'amount' | 'flowAmount', value: string | number) => {
     const updated = [...gratitudeItems];
     updated[index][field] = value as never;
     setGratitudeItems(updated);
@@ -42,22 +71,65 @@ export default function GratitudePage() {
     const validItems = gratitudeItems.filter(item => item.content.trim() !== '');
     if (validItems.length === 0) return;
 
+    console.log('🔍 Contract status check:', {
+      contractsReady,
+      authenticated,
+      ready,
+      partnershipsCount: partnerships.length,
+      loading,
+      error
+    });
+
+    if (!contractsReady) {
+      alert('Contracts not ready. Please wait for wallet connection...');
+      return;
+    }
+
+    if (!authenticated) {
+      alert('Please connect your wallet first');
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      // 保存每个感恩条目到模拟API
+      // If no partnerships exist, prompt user to create one first
+      if (partnerships.length === 0) {
+        alert('Please create a partnership first before recording gratitude. Go to Dashboard to set up a partnership.');
+        window.location.href = '/dashboard';
+        return;
+      }
+
+      // Record gratitude on blockchain for each item
       for (const item of validItems) {
-        await MockAPI.createGratitude({
-          userId: user?.id || 'anonymous',
-          content: item.content,
-          amount: item.amount,
-        });
+        if (item.content.trim()) {
+          console.log('Recording gratitude:', {
+            partnershipId: selectedPartnership,
+            content: item.content,
+            flowAmount: item.flowAmount
+          });
+
+          // Record on blockchain
+          await addGratitude(
+            selectedPartnership, 
+            item.content, 
+            item.amount > 0 ? item.amount.toString() : '0'
+          );
+
+          // Also save to mock API for additional data
+          await MockAPI.createGratitude({
+            userId: user?.id || 'anonymous',
+            content: item.content,
+            amount: item.amount,
+          });
+        }
       }
       
-      router.push('/wallet');
-    } catch (error) {
-      console.error('Failed to save gratitude entries:', error);
-      alert('保存失败，请重试');
+      alert('✅ Gratitude recorded successfully on blockchain!');
+      window.location.href = '/wallet';
+    } catch (error: any) {
+      console.error('Failed to record gratitude:', error);
+      alert(`Failed to record gratitude: ${error.message || 'Please try again'}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -90,7 +162,7 @@ export default function GratitudePage() {
                 🔗 Connect Wallet
               </button>
               <button
-                onClick={() => router.push('/')}
+                onClick={() => window.location.href = '/'}
                 className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors"
               >
                 Back to Home
@@ -113,7 +185,55 @@ export default function GratitudePage() {
         <UserInfo />
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Log your gratitude for today</h1>
-          <p className="text-gray-600 mb-8">Record up to 3 things you're grateful for today.</p>
+          <p className="text-gray-600 mb-4">Record up to 3 things you're grateful for today.</p>
+          
+          {/* Wallet Status */}
+          {contractsReady && (
+            <div className="mb-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="font-semibold text-purple-800">Wallet Balance</h3>
+                  <div className="text-sm text-purple-700">
+                    FLOW: {parseFloat(balances.flow).toFixed(4)} | USDC: {parseFloat(balances.usdc).toFixed(2)}
+                  </div>
+                </div>
+                <div className="text-xs text-purple-600">
+                  {partnerships.length} Partnership{partnerships.length !== 1 ? 's' : ''}
+                </div>
+              </div>
+              {error && (
+                <p className="text-red-600 text-xs mt-2">⚠️ {error}</p>
+              )}
+            </div>
+          )}
+
+          {/* Partnership Selection */}
+          {partnerships.length > 0 && (
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Select Partnership
+              </label>
+              <select
+                value={selectedPartnership}
+                onChange={(e) => setSelectedPartnership(parseInt(e.target.value))}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                {partnerships.map((partnership, index) => (
+                  <option key={partnership.id} value={partnership.id}>
+                    Partnership {partnership.id} - {partnership.partner1.slice(0, 6)}...{partnership.partner1.slice(-4)} & {partnership.partner2.slice(0, 6)}...{partnership.partner2.slice(-4)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {partnerships.length === 0 && contractsReady && (
+            <div className="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+              <p className="text-yellow-800 text-sm">
+                ⚠️ No partnerships found. Please create a partnership first in the Dashboard.
+              </p>
+            </div>
+          )}
           
           <div className="space-y-6">
             {gratitudeItems.map((item, index) => (
@@ -146,19 +266,38 @@ export default function GratitudePage() {
                     />
                   </div>
                   
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Optional donation amount (USD)
-                    </label>
-                    <input
-                      type="number"
-                      value={item.amount}
-                      onChange={(e) => updateGratitudeItem(index, 'amount', parseFloat(e.target.value) || 0)}
-                      placeholder="0.00"
-                      min="0"
-                      step="0.01"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Optional FLOW amount
+                      </label>
+                      <input
+                        type="number"
+                        value={item.flowAmount}
+                        onChange={(e) => updateGratitudeItem(index, 'flowAmount', parseFloat(e.target.value) || 0)}
+                        placeholder="0.001"
+                        min="0"
+                        step="0.001"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">FLOW tokens to contribute to partnership</p>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Optional USD equivalent
+                      </label>
+                      <input
+                        type="number"
+                        value={item.amount}
+                        onChange={(e) => updateGratitudeItem(index, 'amount', parseFloat(e.target.value) || 0)}
+                        placeholder="0.00"
+                        min="0"
+                        step="0.01"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">For tracking purposes only</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -176,7 +315,7 @@ export default function GratitudePage() {
           
           <div className="mt-8 flex justify-between">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => window.location.href = '/'}
               className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
             >
               Back

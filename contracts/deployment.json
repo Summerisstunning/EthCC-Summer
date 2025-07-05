@@ -1,13 +1,30 @@
 {
   "network": "flow-mainnet",
-  "contractAddress": "0xd81e174058b2922f836c43c9fd4f8c806673346e",
   "deployer": "0x19D427BA7514c2C8603737b4C38eF595121D2C63",
-  "deployedAt": "2025-07-05T10:12:39.228Z",
+  "deployedAt": "2025-01-05T17:10:03.047Z",
   "chainId": 747,
   "rpcUrl": "https://mainnet.evm.nodes.onflow.org",
-  "explorer": "https://evm.flowscan.org/address/0xd81e174058b2922f836c43c9fd4f8c806673346e",
   "status": "DEPLOYED_SUCCESS",
-  "gasUsed": "2,847,293",
-  "gasPrice": "0.000000001 FLOW",
-  "deploymentCost": "0.002847293 FLOW"
+  "gasUsed": "0.005011071 FLOW",
+  "remainingBalance": "1.494988929 FLOW",
+  "contracts": {
+    "mockUSDC": {
+      "address": "0x49f6B4bE035f86C4C8F6785c39Ca6b26ed60A07E",
+      "name": "Mock USDC",
+      "verified": true,
+      "explorer": "https://flowscan.org/address/0x49f6B4bE035f86C4C8F6785c39Ca6b26ed60A07E"
+    },
+    "aaSharing": {
+      "address": "0xC5EbC476BA2C9fb014b74C017211AbACFa80210c",
+      "name": "AA Sharing",
+      "verified": true,
+      "explorer": "https://flowscan.org/address/0xC5EbC476BA2C9fb014b74C017211AbACFa80210c"
+    },
+    "bridge": {
+      "address": "0xF49b526BB6687a962a86D9737a773b158a0C2C05",
+      "name": "CrossChain Bridge",
+      "verified": true,
+      "explorer": "https://flowscan.org/address/0xF49b526BB6687a962a86D9737a773b158a0C2C05"
+    }
+  }
 }

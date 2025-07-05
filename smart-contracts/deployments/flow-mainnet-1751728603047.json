@@ -1,0 +1,27 @@
+{
+  "network": "Flow Mainnet",
+  "chainId": "747",
+  "timestamp": "2025-07-05T15:16:43.047Z",
+  "deployer": "0x19D427BA7514c2C8603737b4C38eF595121D2C63",
+  "contracts": {
+    "mockUSDC": {
+      "address": "0x49f6B4bE035f86C4C8F6785c39Ca6b26ed60A07E",
+      "name": "Mock USDC",
+      "symbol": "USDC",
+      "decimals": 6
+    },
+    "aaSharing": {
+      "address": "0xC5EbC476BA2C9fb014b74C017211AbACFa80210c",
+      "owner": "0x19D427BA7514c2C8603737b4C38eF595121D2C63",
+      "usdcToken": "0x49f6B4bE035f86C4C8F6785c39Ca6b26ed60A07E"
+    },
+    "crossChainBridge": {
+      "address": "0xF49b526BB6687a962a86D9737a773b158a0C2C05",
+      "validator": "0x19D427BA7514c2C8603737b4C38eF595121D2C63",
+      "aaContract": "0xC5EbC476BA2C9fb014b74C017211AbACFa80210c",
+      "fee": "0.1%"
+    }
+  },
+  "gasUsed": "0.005011071",
+  "deploymentCost": "0.005011071 FLOW"
+}

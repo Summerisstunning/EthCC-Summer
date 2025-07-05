@@ -16,16 +16,22 @@ export default function Navigation() {
       description: 'Bali Dreams'
     },
     { 
+      path: '/quick-partnership', 
+      label: 'Partnership',
+      icon: '💕',
+      description: 'Create Partnership'
+    },
+    { 
       path: '/gratitude', 
       label: 'Gratitude',
       icon: '💝',
       description: 'Express Love'
     },
     { 
-      path: '/wallet', 
-      label: 'Wallet',
-      icon: '💰',
-      description: 'Shared Journey'
+      path: '/storage', 
+      label: 'Storage',
+      icon: '💾',
+      description: 'Blockchain Storage'
     },
     { 
       path: '/dashboard', 
@@ -36,13 +42,24 @@ export default function Navigation() {
   ];
 
   const handleNavigation = (path: string) => {
-    console.log('Navigating to:', path);
+    console.log('🧭 Navigating to:', path);
+    
+    // Add loading state to prevent double clicks
+    const button = document.activeElement as HTMLButtonElement;
+    if (button) {
+      button.disabled = true;
+      setTimeout(() => {
+        button.disabled = false;
+      }, 1000);
+    }
+    
     try {
-      router.push(path);
+      // Force page reload for navigation to ensure clean state
+      window.location.href = path;
     } catch (error) {
       console.error('Navigation error:', error);
-      // Fallback to window.location
-      window.location.href = path;
+      // Fallback to Next.js router
+      router.push(path);
     }
   };
 

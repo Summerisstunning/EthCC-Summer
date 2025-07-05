@@ -1,0 +1,37 @@
+{
+  "name": "smart-contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "test:coverage": "hardhat coverage",
+    "test:gas": "REPORT_GAS=true hardhat test",
+    "compile": "hardhat compile",
+    "deploy:local": "hardhat run scripts/deploy.js --network hardhat",
+    "deploy:flowTestnet": "hardhat run scripts/deploy.js --network flowTestnet",
+    "deploy:flowMainnet": "hardhat run scripts/deploy-flow-mainnet.js --network flowMainnet",
+    "verify:flowMainnet": "hardhat verify --network flowMainnet",
+    "test:flowMainnet": "hardhat run scripts/test-functionality.js --network flowMainnet",
+    "deploy:arbitrum": "hardhat run scripts/deploy.js --network arbitrum",
+    "ignition:local": "hardhat ignition deploy ignition/modules/AASharing.js --network hardhat",
+    "ignition:flowTestnet": "hardhat ignition deploy ignition/modules/AASharing.js --network flowTestnet",
+    "ignition:flowMainnet": "hardhat ignition deploy ignition/modules/AASharing.js --network flowMainnet",
+    "verify:flowTestnet": "hardhat verify --network flowTestnet",
+    "clean": "hardhat clean",
+    "size": "hardhat size-contracts",
+    "node": "hardhat node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "^0.15.12",
+    "@nomicfoundation/hardhat-toolbox": "^6.0.0",
+    "@openzeppelin/contracts": "^5.3.0",
+    "hardhat": "^2.25.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.1"
+  }
+}
