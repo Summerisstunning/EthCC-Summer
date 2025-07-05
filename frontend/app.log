@@ -48,3 +48,71 @@
  ✓ Compiled in 2.5s
  ✓ Compiled in 2.4s
  ✓ Compiled in 1037ms
+ GET / 200 in 793ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 393ms
+ HEAD / 200 in 14539ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1814ms
+ GET / 200 in 148ms
+ GET /gratitude 200 in 2205ms
+ GET /gratitude 200 in 1014ms
+ GET /gratitude 200 in 663ms
+ GET /gratitude 200 in 1080ms
+ GET /wallet 200 in 869ms
+ GET /wallet 200 in 298ms
+ GET /gratitude 200 in 1036ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 633ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 335ms
+ GET / 200 in 161ms
+ GET /dashboard 200 in 355ms
+ GET /dashboard 200 in 4494ms
+ GET /gratitude 200 in 821ms
+ ✓ Compiled in 2.9s
+ ✓ Compiled in 494ms
+ ✓ Compiled /dashboard in 267ms
+ GET /dashboard 200 in 500ms
+ GET /dashboard 200 in 75ms
+ GET /dashboard 200 in 60ms
+ GET /dashboard 200 in 54ms
+ ○ Compiling / ...
+ ✓ Compiled in 136.2s
+ ✓ Compiled / in 50.3s
+Navigation component state: { pathname: '/', authenticated: false, ready: false }
+ GET / 200 in 51734ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 389ms
+Navigation component state: { pathname: '/', authenticated: false, ready: false }
+ HEAD / 200 in 18455ms
+ GET / 200 in 215ms
+ ○ Compiling /gratitude ...
+ ✓ Compiled /gratitude in 1582ms
+ GET /gratitude 200 in 1940ms
+ GET /gratitude 200 in 103ms
+ ✓ Compiled /wallet in 250ms
+ GET /wallet 200 in 513ms
+ GET /gratitude 200 in 197ms
+ ○ Compiling /_not-found/page ...
+ GET / 200 in 3606ms
+ GET /gratitude 200 in 3704ms
+ ✓ Compiled /_not-found/page in 75.7s
+Navigation component state: {
+  pathname: '/.well-known/appspecific/com.chrome.devtools.json',
+  authenticated: false,
+  ready: false
+}
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 77762ms
+ GET /wallet 200 in 392ms
+ GET /wallet 200 in 126ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 3.5s
+ GET /dashboard 200 in 3741ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://172.31.48.79:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'swcMinify'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ✓ Ready in 1135ms
+[?25h

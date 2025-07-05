@@ -6,7 +6,9 @@ import Navigation from "@/components/navigation";
 import ImageShowcase from "@/components/image-showcase";
 import ErrorBoundary from "@/components/error-boundary";
 import ExtensionDetector from "@/components/extension-detector";
+import ExtensionBlocker from "@/components/extension-blocker";
 import DebugNavigation from "@/components/debug-navigation";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script 
+          src="/extension-cleanup.js" 
+          strategy="beforeInteractive"
+          id="extension-cleanup"
+        />
+      </head>
       <body className={`${inter.className} antialiased`}>
+        <ExtensionBlocker />
         <ErrorBoundary>
           <Providers>
             <Navigation />

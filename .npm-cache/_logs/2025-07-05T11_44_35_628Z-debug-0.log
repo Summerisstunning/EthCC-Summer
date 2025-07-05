@@ -6,14 +6,7 @@
 5 silly config load:file:/Users/apple/.nvm/versions/node/v23.3.0/etc/npmrc
 6 verbose title npm view @anthropic-ai/claude-code@latest version
 7 verbose argv "view" "@anthropic-ai/claude-code@latest" "version"
-8 verbose logfile logs-max:10 dir:/Users/apple/Desktop/AAsharing/.npm-cache/_logs/2025-07-05T10_47_09_577Z-
-9 verbose logfile /Users/apple/Desktop/AAsharing/.npm-cache/_logs/2025-07-05T10_47_09_577Z-debug-0.log
+8 verbose logfile logs-max:10 dir:/Users/apple/Desktop/AAsharing/.npm-cache/_logs/2025-07-05T11_44_35_628Z-
+9 verbose logfile /Users/apple/Desktop/AAsharing/.npm-cache/_logs/2025-07-05T11_44_35_628Z-debug-0.log
 10 silly logfile start cleaning logs, removing 2 files
 11 silly logfile done cleaning log files
-12 http fetch GET 200 https://registry.npmmirror.com/@anthropic-ai%2fclaude-code 197ms (cache revalidated)
-13 verbose cwd /Users/apple/Desktop/AAsharing
-14 verbose os Darwin 23.1.0
-15 verbose node v23.3.0
-16 verbose npm  v10.9.0
-17 verbose exit 0
-18 info ok

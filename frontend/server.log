@@ -1,0 +1,55 @@
+
+> frontend@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://172.31.48.79:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'swcMinify'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ✓ Ready in 1195ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://172.31.48.79:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1122ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 1193ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1661ms
+ ○ Compiling / ...
+ ✓ Compiled / in 73.7s
+ GET / 200 in 73883ms
+ GET / 200 in 53125ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 924ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 373ms
+(node:43673) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Navigation component state: { pathname: '/', authenticated: false, ready: false }
+ GET / 200 in 1352ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 312ms
+Navigation component state: { pathname: '/', authenticated: false, ready: false }
+ HEAD / 200 in 21002ms
+ ○ Compiling / ...
+ ✓ Compiled in 2.3s
+ ✓ Compiled / in 3.3s
+ GET / 200 in 4682ms
+ ○ Compiling / ...
+ ✓ Compiled in 17.8s
+ ✓ Compiled / in 10.2s
+Navigation component state: { pathname: '/', authenticated: false, ready: false }
+ GET / 200 in 19252ms
+ GET / 200 in 14914ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 480ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 1608ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 1354ms
+ GET / 200 in 609ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 403ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 327ms
