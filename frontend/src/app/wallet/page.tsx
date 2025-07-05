@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
 import BackgroundImage from '@/components/background-image';
+import CrossChainWidget from '@/components/cross-chain-widget';
 import { MockAPI } from '@/lib/mock-api';
 
 export default function WalletPage() {
@@ -133,6 +134,16 @@ export default function WalletPage() {
               {isLoading ? 'Processing...' : 'Confirm Contribution'}
             </button>
           </div>
+        </div>
+        
+        {/* Avail Nexus 跨链功能 */}
+        <div className="mt-8">
+          <CrossChainWidget 
+            onSuccess={(txStatus) => {
+              console.log('Cross-chain transaction completed:', txStatus);
+              // 可以在这里更新余额或显示成功消息
+            }}
+          />
         </div>
         </div>
       </div>

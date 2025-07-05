@@ -83,19 +83,33 @@ pub contract AALedger {
 ### 🌐 3. Avail Nexus — Cross-Chain Bridge
 
 ```js
-import { nexus } from '@availproject/avail-nexus';
+import { nexus } from '@/lib/avail-nexus';
 
+// Cross-chain transfer with direct gratitude contribution
 await nexus.bridgeAndExecute({
   sourceChain: 'ethereum',
   destinationChain: 'flow',
-  token: 'usdc',
-  amount: 100,
+  token: 'USDC',
+  amount: 50,
   callData: {
-    to: goalSmartContractAddress,
-    data: encodeUnlockGoal('Trip to Bali'),
+    to: 'AA_SHARING_CONTRACT_ADDRESS',
+    data: encodeGratitudeContribution('Thank you for being amazing!'),
   }
 });
+
+// Get unified balance across all chains
+const unifiedBalance = await nexus.getUnifiedBalance('USDC');
+console.log(`Total USDC: ${unifiedBalance.totalBalance}`);
+console.log('Per chain:', unifiedBalance.balancesByChain);
 ```
+
+**Supported Features:**
+- 🔄 **Cross-chain transactions** across 5+ chains (Ethereum, Arbitrum, Polygon, zkSync, Flow)
+- 💰 **Unified balances** - Aggregated portfolio view
+- ⚡ **Smart execution** - Direct gratitude contributions via cross-chain calls
+- 📊 **Transaction simulation** - Preview costs and timing
+- 🛠️ **Rich utilities** - Address validation, formatting
+- 📱 **Seamless UX** - No manual network switches or bridge interfaces
 
 ---
 
@@ -183,12 +197,17 @@ npm run dev
 - [x] PostgreSQL database with full schema
 - [x] Flow smart contract (AALedger.cdc)
 - [x] Docker development environment
-- [x] Privy SDK integration setup
+- [x] Privy SDK integration and authentication
+- [x] **Avail Nexus cross-chain functionality**
+- [x] **Unified balance across 5+ chains**
+- [x] **Cross-chain transaction history**
+- [x] **Background image support**
+- [x] **Mock API for development**
 
 ### 🔄 In Progress
-- [ ] Privy authentication flow
-- [ ] Flow blockchain integration
-- [ ] Real-time wallet balance updates
+- [ ] Flow blockchain integration (connecting to testnet)
+- [ ] Real blockchain transactions
+- [ ] NFT memory minting on goal completion
 
 ## 🗂️ Project Structure
 

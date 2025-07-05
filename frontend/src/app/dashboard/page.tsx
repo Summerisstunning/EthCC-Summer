@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
 import BackgroundImage from '@/components/background-image';
+import CrossChainHistory from '@/components/cross-chain-history';
 import { MockAPI } from '@/lib/mock-api';
 
 export default function DashboardPage() {
@@ -112,21 +113,29 @@ export default function DashboardPage() {
             </button>
           </div>
           
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">Recent Activity</h3>
-            <div className="space-y-2 text-sm text-gray-600">
-              <div className="flex justify-between">
-                <span>Gratitude contribution</span>
-                <span>+$15.00</span>
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* 本地活动 */}
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Recent Activity</h3>
+              <div className="space-y-2 text-sm text-gray-600">
+                <div className="flex justify-between">
+                  <span>Gratitude contribution</span>
+                  <span>+$15.00</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Wallet contribution</span>
+                  <span>+$50.00</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Previous balance</span>
+                  <span>$150.75</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>Wallet contribution</span>
-                <span>+$50.00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Previous balance</span>
-                <span>$150.75</span>
-              </div>
+            </div>
+
+            {/* 跨链历史 */}
+            <div className="lg:col-span-1">
+              <CrossChainHistory />
             </div>
           </div>
         </div>
