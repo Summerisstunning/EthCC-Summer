@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
+import BackgroundImage from '@/components/background-image';
+import { MockAPI } from '@/lib/mock-api';
 
 export default function WalletPage() {
   const router = useRouter();
@@ -16,11 +18,27 @@ export default function WalletPage() {
     
     setIsLoading(true);
     
-    // Mock transaction delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsLoading(false);
-    router.push('/dashboard');
+    try {
+      // 使用模拟API更新钱包余额
+      await MockAPI.updateWalletBalance('partnership-1', contributionAmount);
+      
+      // 创建交易记录
+      await MockAPI.createTransaction({
+        userId: 'user-1',
+        partnershipId: 'partnership-1',
+        type: 'contribution',
+        amount: contributionAmount,
+        description: `Manual wallet contribution: $${contributionAmount}`,
+        status: 'confirmed',
+      });
+      
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Contribution failed:', error);
+      alert('贡献失败，请重试');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!ready) {
@@ -48,8 +66,9 @@ export default function WalletPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
-      <div className="max-w-2xl mx-auto py-8">
+    <BackgroundImage src="/images/wallet-bg.jpg" alt="Wallet background">
+      <div className="p-4 min-h-screen">
+        <div className="max-w-2xl mx-auto py-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Shared Wallet Contribution</h1>
           <p className="text-gray-600 mb-8">Add an amount to the shared wallet.</p>
@@ -115,7 +134,8 @@ export default function WalletPage() {
             </button>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </BackgroundImage>
   );
 }

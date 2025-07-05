@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
 import UserInfo from '@/components/user-info';
+import BackgroundImage from '@/components/background-image';
+import { MockAPI } from '@/lib/mock-api';
 
 interface GratitudeItem {
   content: string;
@@ -12,10 +14,11 @@ interface GratitudeItem {
 
 export default function GratitudePage() {
   const router = useRouter();
-  const { authenticated, ready } = usePrivy();
+  const { authenticated, ready, user } = usePrivy();
   const [gratitudeItems, setGratitudeItems] = useState<GratitudeItem[]>([
     { content: '', amount: 0 }
   ]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const addGratitudeItem = () => {
     if (gratitudeItems.length < 3) {
@@ -35,10 +38,28 @@ export default function GratitudePage() {
     setGratitudeItems(updated);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const validItems = gratitudeItems.filter(item => item.content.trim() !== '');
-    if (validItems.length > 0) {
+    if (validItems.length === 0) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // 保存每个感恩条目到模拟API
+      for (const item of validItems) {
+        await MockAPI.createGratitude({
+          userId: user?.id || 'anonymous',
+          content: item.content,
+          amount: item.amount,
+        });
+      }
+      
       router.push('/wallet');
+    } catch (error) {
+      console.error('Failed to save gratitude entries:', error);
+      alert('保存失败，请重试');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -67,8 +88,9 @@ export default function GratitudePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
-      <div className="max-w-2xl mx-auto py-8">
+    <BackgroundImage src="/images/gratitude-bg.jpg" alt="Gratitude background">
+      <div className="p-4 min-h-screen">
+        <div className="max-w-2xl mx-auto py-8">
         <UserInfo />
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Log your gratitude for today</h1>
@@ -142,14 +164,15 @@ export default function GratitudePage() {
             </button>
             <button
               onClick={handleNext}
-              disabled={gratitudeItems.filter(item => item.content.trim() !== '').length === 0}
+              disabled={gratitudeItems.filter(item => item.content.trim() !== '').length === 0 || isSubmitting}
               className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next
+              {isSubmitting ? 'Saving...' : 'Next'}
             </button>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </BackgroundImage>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { usePrivy } from '@privy-io/react-auth';
+import BackgroundImage from '@/components/background-image';
 
 export default function Home() {
   const router = useRouter();
@@ -29,8 +30,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="max-w-4xl mx-auto text-center">
+    <BackgroundImage src="/images/hero-bg.jpg" alt="Hero background">
+      <div className="flex items-center justify-center p-4 min-h-screen">
+        <div className="max-w-4xl mx-auto text-center">
         <div className="mb-8">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
             Record Your Love.
@@ -64,7 +66,8 @@ export default function Home() {
         <div className="mt-12 text-sm text-gray-500">
           <p>Built with Flow, Privy, and Avail Nexus</p>
         </div>
+        </div>
       </div>
-    </div>
+    </BackgroundImage>
   );
 }
