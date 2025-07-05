@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useCallback } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useContracts } from '@/hooks/useContracts';
 import UserInfo from '@/components/user-info';
@@ -15,7 +14,6 @@ interface GratitudeItem {
 }
 
 export default function GratitudePage() {
-  const router = useRouter();
   const { authenticated, ready, user, login } = usePrivy();
   const { 
     ready: contractsReady, 
@@ -33,21 +31,22 @@ export default function GratitudePage() {
   const [partnerships, setPartnerships] = useState<any[]>([]);
   const [selectedPartnership, setSelectedPartnership] = useState<number>(0);
 
-  // Load partnerships when contracts are ready
-  useEffect(() => {
-    if (contractsReady) {
-      loadPartnerships();
-    }
-  }, [contractsReady]);
-
-  const loadPartnerships = async () => {
+  // 定义loadPartnerships函数
+  const loadPartnerships = useCallback(async () => {
     try {
       const userPartnerships = await getPartnerships();
       setPartnerships(userPartnerships);
     } catch (err) {
       console.error('Failed to load partnerships:', err);
     }
-  };
+  }, [getPartnerships]);
+
+  // Load partnerships when contracts are ready
+  useEffect(() => {
+    if (contractsReady) {
+      loadPartnerships();
+    }
+  }, [contractsReady, loadPartnerships]);
 
   const addGratitudeItem = () => {
     if (gratitudeItems.length < 3) {
@@ -218,7 +217,7 @@ export default function GratitudePage() {
                 onChange={(e) => setSelectedPartnership(parseInt(e.target.value))}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
-                {partnerships.map((partnership, index) => (
+                {partnerships.map((partnership) => (
                   <option key={partnership.id} value={partnership.id}>
                     Partnership {partnership.id} - {partnership.partner1.slice(0, 6)}...{partnership.partner1.slice(-4)} & {partnership.partner2.slice(0, 6)}...{partnership.partner2.slice(-4)}
                   </option>

@@ -1,12 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+// 移除未使用的导入
 import { usePrivy } from '@privy-io/react-auth';
 import { useContracts } from '@/hooks/useContracts';
 import BackgroundImage from '@/components/background-image';
 
 export default function Home() {
-  const router = useRouter();
+  // 移除未使用的router变量
   const { login, authenticated, ready } = usePrivy();
   const { ready: contractsReady, balances, error } = useContracts();
 

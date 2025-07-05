@@ -1,15 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useCallback } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useContracts } from '@/hooks/useContracts';
 import BackgroundImage from '@/components/background-image';
 import CrossChainHistory from '@/components/cross-chain-history';
-import { MockAPI } from '@/lib/mock-api';
+// 移除未使用的导入
 
 export default function DashboardPage() {
-  const router = useRouter();
+  // 使用useRouter hook
   const { authenticated, ready, logout, login } = usePrivy();
   const { 
     ready: contractsReady, 
@@ -20,7 +19,7 @@ export default function DashboardPage() {
     error 
   } = useContracts();
   
-  const [partnerships, setPartnerships] = useState<any[]>([]);
+  const [partnerships, setPartnerships] = useState<Array<{id: string; partner1: string; partner2: string; balance: string; goalCount: number; active: boolean}>>([]);
   const [newPartnerAddress, setNewPartnerAddress] = useState('');
   const [isCreatingPartnership, setIsCreatingPartnership] = useState(false);
   const [walletBalance] = useState(215.75); // Mock balance after contribution
@@ -36,16 +35,16 @@ export default function DashboardPage() {
     if (contractsReady) {
       loadPartnerships();
     }
-  }, [contractsReady]);
+  }, [contractsReady, loadPartnerships]);
 
-  const loadPartnerships = async () => {
+  const loadPartnerships = useCallback(async () => {
     try {
       const userPartnerships = await getPartnerships();
       setPartnerships(userPartnerships);
     } catch (err) {
       console.error('Failed to load partnerships:', err);
     }
-  };
+  }, [getPartnerships]);
 
   const handleCreatePartnership = async () => {
     if (!newPartnerAddress.trim()) {
@@ -64,9 +63,10 @@ export default function DashboardPage() {
       alert('✅ Partnership created successfully!');
       setNewPartnerAddress('');
       await loadPartnerships();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to create partnership:', error);
-      alert(`Failed to create partnership: ${error.message || 'Please try again'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Please try again';
+      alert(`Failed to create partnership: ${errorMessage}`);
     } finally {
       setIsCreatingPartnership(false);
     }
@@ -161,7 +161,7 @@ export default function DashboardPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Partner's Wallet Address
+                  Partner&apos;s Wallet Address
                 </label>
                 <input
                   type="text"
@@ -171,7 +171,7 @@ export default function DashboardPage() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Enter your partner's Ethereum wallet address to create a shared partnership for recording gratitude and achieving goals together.
+                  Enter your partner&apos;s Ethereum wallet address to create a shared partnership for recording gratitude and achieving goals together.
                 </p>
               </div>
               <button
