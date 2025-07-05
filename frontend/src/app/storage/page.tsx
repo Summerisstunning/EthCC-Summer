@@ -98,9 +98,10 @@ export default function StoragePage() {
       setMessages(['']);
       setTokenAmount('');
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to store data:', error);
-      alert(`Failed to store data: ${error.message || 'Please try again'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Please try again';
+      alert(`Failed to store data: ${errorMessage}`);
     } finally {
       setIsStoring(false);
     }
@@ -126,9 +127,10 @@ export default function StoragePage() {
       await loadUserData(storageContract);
       setSingleMessage('');
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to add message:', error);
-      alert(`Failed to add message: ${error.message || 'Please try again'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Please try again';
+      alert(`Failed to add message: ${errorMessage}`);
     } finally {
       setIsAdding(false);
     }

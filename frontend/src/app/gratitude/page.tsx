@@ -28,6 +28,7 @@ export default function GratitudePage() {
     { content: '', amount: 0, flowAmount: 0 }
   ]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // 使用更通用的类型定义，避免类型不匹配问题
   const [partnerships, setPartnerships] = useState<any[]>([]);
   const [selectedPartnership, setSelectedPartnership] = useState<number>(0);
 
@@ -126,9 +127,10 @@ export default function GratitudePage() {
       
       alert('✅ Gratitude recorded successfully on blockchain!');
       window.location.href = '/wallet';
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Please try again';
       console.error('Failed to record gratitude:', error);
-      alert(`Failed to record gratitude: ${error.message || 'Please try again'}`);
+      alert(`Failed to record gratitude: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -184,7 +186,7 @@ export default function GratitudePage() {
         <UserInfo />
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Log your gratitude for today</h1>
-          <p className="text-gray-600 mb-4">Record up to 3 things you're grateful for today.</p>
+          <p className="text-gray-600 mb-4">Record up to 3 things you&apos;re grateful for today.</p>
           
           {/* Wallet Status */}
           {contractsReady && (

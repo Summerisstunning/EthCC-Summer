@@ -10,8 +10,8 @@ export default function QuickPartnershipPage() {
   const { createPartnership, ready: contractsReady, balances, loading, error } = useContracts();
   
   const [partnerAddress, setPartnerAddress] = useState('');
-  const [nickname1, setNickname1] = useState('Me');
-  const [nickname2, setNickname2] = useState('My Partner');
+  const [nickname1] = useState('Me');
+  const [nickname2] = useState('My Partner');
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreatePartnership = async () => {
@@ -31,9 +31,10 @@ export default function QuickPartnershipPage() {
       await createPartnership(partnerAddress, nickname1, nickname2);
       alert('✅ Partnership created successfully! You can now record gratitude.');
       window.location.href = '/gratitude';
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Please try again';
       console.error('Failed to create partnership:', error);
-      alert(`Failed to create partnership: ${error.message || 'Please try again'}`);
+      alert(`Failed to create partnership: ${errorMessage}`);
     } finally {
       setIsCreating(false);
     }
@@ -132,7 +133,7 @@ export default function QuickPartnershipPage() {
             <div className="space-y-4 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Partner's Wallet Address
+                  Partner&apos;s Wallet Address
                 </label>
                 <input
                   type="text"
@@ -142,7 +143,7 @@ export default function QuickPartnershipPage() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Enter your partner's Ethereum wallet address. This creates a shared partnership for recording gratitude together.
+                  Enter your partner&apos;s Ethereum wallet address. This creates a shared partnership for recording gratitude together.
                 </p>
               </div>
             </div>

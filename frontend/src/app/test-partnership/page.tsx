@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useContracts } from '@/hooks/useContracts';
 import BackgroundImage from '@/components/background-image';
@@ -32,9 +32,10 @@ export default function TestPartnershipPage() {
       
       setResult(`✅ Partnership created successfully! Transaction: ${receipt.hash}`);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('❌ Failed to create partnership:', error);
-      setResult(`❌ Failed: ${error.message || 'Unknown error'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setResult(`❌ Failed: ${errorMessage}`);
     } finally {
       setIsCreating(false);
     }
