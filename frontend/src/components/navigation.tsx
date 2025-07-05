@@ -6,7 +6,7 @@ import { usePrivy } from '@privy-io/react-auth';
 export default function Navigation() {
   const router = useRouter();
   const pathname = usePathname();
-  const { authenticated, logout } = usePrivy();
+  const { authenticated, logout, login } = usePrivy();
 
   const navigationItems = [
     { 
@@ -19,22 +19,19 @@ export default function Navigation() {
       path: '/gratitude', 
       label: 'Gratitude',
       icon: '💝',
-      description: 'Express Love',
-      requireAuth: true
+      description: 'Express Love'
     },
     { 
       path: '/wallet', 
       label: 'Wallet',
       icon: '💰',
-      description: 'Shared Journey',
-      requireAuth: true
+      description: 'Shared Journey'
     },
     { 
       path: '/dashboard', 
       label: 'Dashboard',
       icon: '📊',
-      description: 'Celebrate Together',
-      requireAuth: true
+      description: 'Celebrate Together'
     }
   ];
 
@@ -52,22 +49,17 @@ export default function Navigation() {
       <div className="bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-white/20 px-6 py-3">
         <div className="flex items-center space-x-1">
           {navigationItems.map((item) => {
-            // 如果需要认证但用户未登录，则禁用
-            const isDisabled = item.requireAuth && !authenticated;
             const isActive = pathname === item.path;
             
             return (
               <button
                 key={item.path}
-                onClick={() => !isDisabled && handleNavigation(item.path)}
-                disabled={isDisabled}
+                onClick={() => handleNavigation(item.path)}
                 className={`
                   group relative px-4 py-2 rounded-full transition-all duration-300
                   ${isActive 
                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' 
-                    : isDisabled
-                      ? 'text-gray-400 cursor-not-allowed'
-                      : 'text-gray-700 hover:bg-purple-100 hover:text-purple-700'
+                    : 'text-gray-700 hover:bg-purple-100 hover:text-purple-700'
                   }
                 `}
                 title={item.description}
@@ -85,18 +77,25 @@ export default function Navigation() {
             );
           })}
           
-          {/* 分隔线 */}
-          {authenticated && (
-            <>
-              <div className="w-px h-6 bg-gray-300 mx-2" />
-              <button
-                onClick={handleLogout}
-                className="px-3 py-2 text-gray-600 hover:text-red-600 transition-colors duration-200 text-sm"
-                title="Logout"
-              >
-                🚪
-              </button>
-            </>
+          {/* 分隔线和用户操作 */}
+          <div className="w-px h-6 bg-gray-300 mx-2" />
+          
+          {!authenticated ? (
+            <button
+              onClick={login}
+              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
+              title="Connect Wallet"
+            >
+              🔗 Connect
+            </button>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="px-3 py-2 text-gray-600 hover:text-red-600 transition-colors duration-200 text-sm"
+              title="Logout"
+            >
+              🚪 Logout
+            </button>
           )}
         </div>
       </div>

@@ -1,0 +1,32 @@
+{
+  "contracts": {
+    "AALedger": "./contracts/cadence/AALedger.cdc"
+  },
+  "networks": {
+    "emulator": "127.0.0.1:3569",
+    "testnet": "access.devnet.nodes.onflow.org:9000",
+    "mainnet": "access.mainnet.nodes.onflow.org:9000"
+  },
+  "accounts": {
+    "emulator-account": {
+      "address": "f8d6e0586b0a20c7",
+      "key": "5112883de06b9576af62b9aafa7ead685fb7fb46c495039b1a83649d61bff97c"
+    },
+    "testnet-account": {
+      "address": "0x742d35Cc6371C0532e3a36bA2ba08e99A6FFEBAf",
+      "key": "$FLOW_PRIVATE_KEY"
+    }
+  },
+  "deployments": {
+    "emulator": {
+      "emulator-account": [
+        "AALedger"
+      ]
+    },
+    "testnet": {
+      "testnet-account": [
+        "AALedger"
+      ]
+    }
+  }
+}

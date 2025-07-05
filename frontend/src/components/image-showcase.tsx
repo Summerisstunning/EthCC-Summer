@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ImageInfo {
   src: string;
@@ -43,6 +43,15 @@ const imageGallery: ImageInfo[] = [
 
 export default function ImageShowcase() {
   const [selectedImage, setSelectedImage] = useState<ImageInfo | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <>

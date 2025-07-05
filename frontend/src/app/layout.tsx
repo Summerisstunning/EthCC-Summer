@@ -4,6 +4,8 @@ import "./globals.css";
 import Providers from "@/components/providers";
 import Navigation from "@/components/navigation";
 import ImageShowcase from "@/components/image-showcase";
+import ErrorBoundary from "@/components/error-boundary";
+import ExtensionDetector from "@/components/extension-detector";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,11 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <Providers>
-          <Navigation />
-          <ImageShowcase />
-          {children}
-        </Providers>
+        <ErrorBoundary>
+          <Providers>
+            <Navigation />
+            <ImageShowcase />
+            <ExtensionDetector />
+            {children}
+          </Providers>
+        </ErrorBoundary>
       </body>
     </html>
   );

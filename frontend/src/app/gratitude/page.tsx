@@ -14,7 +14,7 @@ interface GratitudeItem {
 
 export default function GratitudePage() {
   const router = useRouter();
-  const { authenticated, ready, user } = usePrivy();
+  const { authenticated, ready, user, login } = usePrivy();
   const [gratitudeItems, setGratitudeItems] = useState<GratitudeItem[]>([
     { content: '', amount: 0 }
   ]);
@@ -73,17 +73,32 @@ export default function GratitudePage() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">请先登录以继续</h2>
-          <button
-            onClick={() => router.push('/')}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-semibold"
-          >
-            返回首页
-          </button>
+      <BackgroundImage 
+        src="/images/gratitude-bg.png" 
+        alt="Bali beauty - Gratitude inspiration"
+        overlayIntensity="medium"
+      >
+        <div className="min-h-screen flex items-center justify-center p-4 pt-20">
+          <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-8 text-center max-w-md">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">🔐 Connect Wallet to Continue</h2>
+            <p className="text-gray-600 mb-6">Please connect your wallet to record your daily gratitude.</p>
+            <div className="space-y-3">
+              <button
+                onClick={login}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
+              >
+                🔗 Connect Wallet
+              </button>
+              <button
+                onClick={() => router.push('/')}
+                className="w-full border border-gray-300 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors"
+              >
+                Back to Home
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </BackgroundImage>
     );
   }
 
